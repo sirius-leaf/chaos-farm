@@ -3,14 +3,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameObject hitPoint;
+    public GameObject plantPrefab;
     public Transform cameraTransform;
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public float mouseSensitivity = 10f;
     public float groundCheckDistance = 1.1f;
+    public float raycastDistance = 10f;
 
     private InputSystem_Actions inputActions;
     private Rigidbody rb;
+    private RaycastHit groundHit;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private float xRotation = 0f;
@@ -31,6 +35,8 @@ public class PlayerControl : MonoBehaviour
 
         inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
+
+        inputActions.Player.Jump.performed += ctx => Jump();
     }
 
     private void OnDisable()
@@ -76,6 +82,19 @@ public class PlayerControl : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         inputActions.Player.Jump.performed += ctx => Jump();
+
+        // raycast
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out groundHit, raycastDistance, LayerMask.GetMask("Soil")))
+        {
+            GameObject hitObject = groundHit.collider.gameObject;
+
+            if (hitObject.transform.childCount <= 1 && inputActions.Player.Attack.IsPressed())
+            {
+                Instantiate(plantPrefab, hitObject.transform.position, Quaternion.identity, hitObject.transform);
+            }
+
+            hitPoint.transform.position = groundHit.point;
+        }
     }
 
     void CheckGround()
