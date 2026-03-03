@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour
         Move();
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 direction = transform.right * moveInput.x + transform.forward * moveInput.y;
         Vector3 targetVelocity = direction * moveSpeed;
@@ -70,7 +70,7 @@ public class PlayerControl : MonoBehaviour
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
-    void Look()
+    private void Look()
     {
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
@@ -84,25 +84,48 @@ public class PlayerControl : MonoBehaviour
         inputActions.Player.Jump.performed += ctx => Jump();
 
         // raycast
-        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out groundHit, raycastDistance, LayerMask.GetMask("Soil")))
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out groundHit, raycastDistance))
         {
             GameObject hitObject = groundHit.collider.gameObject;
 
-            if (hitObject.transform.childCount <= 1 && inputActions.Player.Attack.IsPressed())
-            {
-                Instantiate(plantPrefab, hitObject.transform.position, Quaternion.identity, hitObject.transform);
-            }
+            CheckObject(hitObject);
 
             hitPoint.transform.position = groundHit.point;
         }
     }
 
-    void CheckGround()
+    private void CheckObject(GameObject hitObject)
+    {
+        bool mouseClicked = inputActions.Player.Attack.IsPressed();
+
+        switch (hitObject.tag)
+        {
+            case "Soil":
+                if (mouseClicked && hitObject.transform.childCount <= 1)
+                {
+                    Instantiate(plantPrefab, hitObject.transform.position, Quaternion.identity, hitObject.transform);
+                }
+
+                break;
+            case "Plant":
+                PlantControl plantScript = hitObject.transform.parent.gameObject.GetComponent<PlantControl>();
+
+                if (mouseClicked && plantScript != null && plantScript.growTimer == 5f)
+                {
+                    Destroy(hitObject.transform.parent.gameObject);
+                    Debug.Log("Plant harvested!");
+                }
+
+                break;
+        }
+    }
+
+    private void CheckGround()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
     }
 
-    void Jump()
+    private void Jump()
     {
         if (isGrounded)
         {

@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 348131820}
   - component: {fileID: 348131822}
   - component: {fileID: 348131821}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Soil Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 823021954}
   - component: {fileID: 823021956}
   - component: {fileID: 823021955}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Soil Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,9 +799,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1275740921}
   - component: {fileID: 1275740918}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Soil
-  m_TagString: Untagged
+  m_TagString: Soil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -853,9 +853,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1418924965}
   - component: {fileID: 1418924966}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Soil (1)
-  m_TagString: Untagged
+  m_TagString: Soil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -869,7 +869,7 @@ Transform:
   m_GameObject: {fileID: 1418924964}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.055, y: 0, z: 4.02}
+  m_LocalPosition: {x: 1, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1000,9 +1000,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1851527696}
   - component: {fileID: 1851527697}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Soil (2)
-  m_TagString: Untagged
+  m_TagString: Soil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1016,7 +1016,7 @@ Transform:
   m_GameObject: {fileID: 1851527695}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.275, y: 0, z: 4.599}
+  m_LocalPosition: {x: -1, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 1890326896}
   - component: {fileID: 1890326898}
   - component: {fileID: 1890326897}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Soil Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
