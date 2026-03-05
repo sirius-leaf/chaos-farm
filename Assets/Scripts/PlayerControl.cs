@@ -84,7 +84,7 @@ public class PlayerControl : MonoBehaviour
         inputActions.Player.Jump.performed += ctx => Jump();
 
         // raycast
-        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out groundHit, raycastDistance))
+        if(inputActions.Player.Attack.triggered && Physics.Raycast(cameraTransform.position, cameraTransform.forward, out groundHit, raycastDistance))
         {
             GameObject hitObject = groundHit.collider.gameObject;
 
@@ -96,12 +96,10 @@ public class PlayerControl : MonoBehaviour
 
     private void CheckObject(GameObject hitObject)
     {
-        bool mouseClicked = inputActions.Player.Attack.IsPressed();
-
         switch (hitObject.tag)
         {
             case "Soil":
-                if (mouseClicked && hitObject.transform.childCount <= 1)
+                if (hitObject.transform.childCount <= 1)
                 {
                     Instantiate(plantPrefab, hitObject.transform.position, Quaternion.identity, hitObject.transform);
                 }
@@ -110,10 +108,9 @@ public class PlayerControl : MonoBehaviour
             case "Plant":
                 PlantControl plantScript = hitObject.transform.parent.gameObject.GetComponent<PlantControl>();
 
-                if (mouseClicked && plantScript != null && plantScript.growTimer == 5f)
+                if (plantScript != null && plantScript.growTimer == plantScript.growTime)
                 {
-                    Destroy(hitObject.transform.parent.gameObject);
-                    Debug.Log("Plant harvested!");
+                    plantScript.PickupPlant();
                 }
 
                 break;

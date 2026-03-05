@@ -120,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5750796769435401124}
   - component: {fileID: 4554985015756524033}
+  - component: {fileID: 1435839642747445706}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -155,5 +156,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e6cd3a574e9768d9cd1775553d1098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   growTime: 5
   growTimer: 0
+--- !u!114 &1435839642747445706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560195560159614089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62aadc533a1086c6badfb8c084a698c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 8a0f3deb1ef68e14180992bbbd898b8f, type: 2}
+  amount: 1
