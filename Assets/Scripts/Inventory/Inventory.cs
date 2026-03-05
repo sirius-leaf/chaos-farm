@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> slots = new List<InventorySlot>();
     public System.Action onInventoryChanged;
     public int slotCount = 10;
+    public int selectedSlot = -1;
 
     void Awake()
     {
@@ -42,5 +43,18 @@ public class Inventory : MonoBehaviour
         }
 
         return false; // Inventory penuh
+    }
+
+    public void SelectSlot(int index)
+    {
+        selectedSlot = index;
+    }
+    
+    public InventorySlot GetSelectedSlot()
+    {
+        if (selectedSlot < 0 || selectedSlot >= slots.Count)
+            return null;
+
+        return slots[selectedSlot];
     }
 }

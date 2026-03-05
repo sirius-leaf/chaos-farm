@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     public float raycastDistance = 10f;
 
     private InputSystem_Actions inputActions;
+    private Inventory inventory;
     private Rigidbody rb;
     private RaycastHit groundHit;
     private Vector2 moveInput;
@@ -47,12 +48,14 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        inventory = GetComponent<Inventory>();
     }
 
     void Update()
     {
         CheckGround();
         Look();
+        SelectSlot();
     }
     void FixedUpdate()
     {
@@ -92,6 +95,20 @@ public class PlayerControl : MonoBehaviour
 
             hitPoint.transform.position = groundHit.point;
         }
+    }
+
+    private void SelectSlot()
+    {
+        if (inputActions.UI.Slot1.triggered) inventory.selectedSlot = 0;
+        else if (inputActions.UI.Slot2.triggered) inventory.selectedSlot = 1;
+        else if (inputActions.UI.Slot3.triggered) inventory.selectedSlot = 2;
+        else if (inputActions.UI.Slot4.triggered) inventory.selectedSlot = 3;
+        else if (inputActions.UI.Slot5.triggered) inventory.selectedSlot = 4;
+        else if (inputActions.UI.Slot6.triggered) inventory.selectedSlot = 5;
+        else if (inputActions.UI.Slot7.triggered) inventory.selectedSlot = 6;
+        else if (inputActions.UI.Slot8.triggered) inventory.selectedSlot = 7;
+        else if (inputActions.UI.Slot9.triggered) inventory.selectedSlot = 8;
+        else if (inputActions.UI.Slot10.triggered) inventory.selectedSlot = 9;
     }
 
     private void CheckObject(GameObject hitObject)

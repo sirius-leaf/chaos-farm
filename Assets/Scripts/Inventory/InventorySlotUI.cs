@@ -6,6 +6,24 @@ public class InventorySlotUI : MonoBehaviour
 {
     public Image icon;
     public TextMeshProUGUI amountText;
+    public int slotId = 0;
+
+    private Inventory inventory;
+    private Image slotFrame;
+
+    public void Start()
+    {
+        inventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
+        slotFrame = GetComponent<Image>();
+    }
+
+    public void Update()
+    {
+        if (inventory.selectedSlot != slotId)
+            slotFrame.color = new(0f, 0f, 0f, 0.5f);
+        else
+            slotFrame.color = new(0f, 0.5f, 0f, 0.5f);
+    }
 
     public void SetSlot(InventorySlot slot)
     {
