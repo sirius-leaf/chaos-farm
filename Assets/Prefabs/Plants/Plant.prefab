@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e6cd3a574e9768d9cd1775553d1098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
   growTime: 5
   growTimer: 0
 --- !u!114 &1435839642747445706

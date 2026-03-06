@@ -9,9 +9,9 @@ public class ItemPickup : MonoBehaviour
     {
         if (inventory.AddItem(item, amount))
         {
+            inventory.onInventoryChanged?.Invoke();
             Destroy(gameObject);
         }
 
-        inventory.onInventoryChanged?.Invoke();
     }
 }

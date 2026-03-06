@@ -116,22 +116,37 @@ public class PlayerControl : MonoBehaviour
         switch (hitObject.tag)
         {
             case "Soil":
-                if (hitObject.transform.childCount <= 1)
-                {
-                    Instantiate(plantPrefab, hitObject.transform.position, Quaternion.identity, hitObject.transform);
-                }
+                SoilControl soil = hitObject.GetComponent<SoilControl>();
 
+                if (soil != null && soil.plant == null) Plant(soil, hitObject);
+                
                 break;
             case "Plant":
                 PlantControl plantScript = hitObject.transform.parent.gameObject.GetComponent<PlantControl>();
 
-                if (plantScript != null && plantScript.growTimer == plantScript.growTime)
-                {
-                    plantScript.PickupPlant();
-                }
+                if (plantScript != null) plantScript.PickupPlant();
+                
+                break;
+            case "Loot Box":
+                LootBoxControl lootBox = hitObject.transform.gameObject.GetComponent<LootBoxControl>();
+
+                if (lootBox != null) lootBox.OpenBox(inventory);
 
                 break;
         }
+    }
+
+    private void Plant(SoilControl soil, GameObject hitObject)
+    {
+        InventorySlot selectedSlot = inventory.GetSelectedSlot();
+
+        if (selectedSlot == null || selectedSlot.item == null || selectedSlot.item is not SeedItemData) return;
+
+        SeedItemData seed = selectedSlot.item as SeedItemData;
+        GameObject plant = Instantiate(seed.plantPrefab, hitObject.transform.position, Quaternion.identity, hitObject.transform);
+        soil.plant = plant;
+
+        inventory.RemoveItem(inventory.selectedSlot);
     }
 
     private void CheckGround()

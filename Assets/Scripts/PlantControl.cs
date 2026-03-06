@@ -9,11 +9,13 @@ public class PlantControl : MonoBehaviour
 
     private Inventory inventory;
     private ItemPickup pickup;
+    private PlantControl plantScript;
 
     void Start()
     {
         pickup = GetComponent<ItemPickup>();
         inventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
+        plantScript = GetComponent<PlantControl>();
     }
 
     void Update()
@@ -25,8 +27,11 @@ public class PlantControl : MonoBehaviour
 
     public void PickupPlant()
     {
-        pickup.PickUp(inventory);
+        if (plantScript.growTimer == plantScript.growTime)
+        {
+            pickup.PickUp(inventory);
 
-        Debug.Log("Plant harvested!");
+            Debug.Log("Plant harvested!");
+        }
     }
 }

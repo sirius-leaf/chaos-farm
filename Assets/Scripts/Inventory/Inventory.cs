@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
                 if (slot.item == item && slot.amount < item.maxStack)
                 {
                     slot.amount += amount;
+                    
                     return true;
                 }
             }
@@ -38,11 +39,29 @@ public class Inventory : MonoBehaviour
             {
                 slot.item = item;
                 slot.amount = amount;
+
                 return true;
             }
         }
 
         return false; // Inventory penuh
+    }
+
+    public void RemoveItem(int slotIndex, int amount = 1)
+    {
+        InventorySlot slot = slots[slotIndex];
+
+        if (slot.item == null) return;
+
+        slot.amount -= amount;
+
+        if (slot.amount <= 0)
+        {
+            slot.item = null;
+            slot.amount = 0;
+        }
+
+        onInventoryChanged?.Invoke();
     }
 
     public void SelectSlot(int index)
